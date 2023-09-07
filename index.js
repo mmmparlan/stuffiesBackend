@@ -12,8 +12,7 @@ const PORT = process.env.PORT || 4000
 const client = require('./db/client')
 //console.log(client)
 
-// here's our API
-server.use('/api', require('./api'))
+
 
 // enable cross-origin resource sharing to proxy api requests
 // from localhost:3000 to localhost:4000 in local dev env
@@ -26,6 +25,9 @@ server.use(morgan('dev'))
 
 // handle application/json requests
 server.use(express.json())
+
+// here's our API
+server.use('/api', require('./api'))
 
 // define a server handle to close open tcp connection after unit tests have run
 const handle = server.listen(PORT, async () => {

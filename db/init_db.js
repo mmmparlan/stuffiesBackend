@@ -1,8 +1,8 @@
 const client = require('./client');
 
-  const 
+  const {
     createInitUsers
-   = require('./models/users')
+   } = require('./models/users')
   
   async function buildTables() {
     try {
@@ -31,8 +31,8 @@ const client = require('./client');
             price INTEGER NOT NULL,
             size VARCHAR(255) NOT NULL,
             color VARCHAR(255) NOT NULL,
-            images VARCHAR(255),
-            reviews TEXT
+            image1 VARCHAR(255),
+            image1 VARCHAR(255)
         )
         `);
     } catch (error) {
@@ -45,7 +45,7 @@ const client = require('./client');
       // create useful starting data by leveraging your
       // Model.method() adapters to seed your db, for example:
       // const user1 = await User.createUser({ ...user info goes here... })
-      createInitUsers;
+      await createInitUsers();
       console.log('creating initial users')
     } catch (error) {
       throw error

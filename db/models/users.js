@@ -4,14 +4,12 @@ const bcrypt = require('bcrypt');
 const SALT_COUNT = 10;
 
 async function createInitUsers(){
-  
   console.log('Starting to create users...');
   try {
-
     const usersToCreate = [
-      { username: 'mark', password: 'mark123' },
-      { username: 'skyla', password: 'skyla123' },
-      { username: 'scarlett', password: 'scarlett123' },
+      { username: 'mark', password: 'password' },
+      { username: 'skyla', password: 'password' },
+      { username: 'scarlett', password: 'password' },
     ]
     const users = await Promise.all(usersToCreate.map(createUser));
 

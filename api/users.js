@@ -1,6 +1,7 @@
 const express = require('express');
 const apiRouter = express.Router();
 const jwt = require('jsonwebtoken');
+const { JWT_SECRET = 'neverTell'} = process.env;
 const {requireUser} = require('./utils')
 const { createUser, getAllUsers, getUser, getUserByUserName, getUserById} = require('../db');
 
@@ -21,7 +22,7 @@ apiRouter.post('/login', async (req,res,next)=> {
                 message: 'username or password is incorrect',
             })
         } else {
-            const token = jwt.sign({id: user.id, username: user.username}, JWT_SECRET, {expiresIn: '1w'});
+            const token = jwt.sign({id: user.id, username: user.username}, JWT_SECRET);
             res.send({user, message:"you're logged in!", token});
         }
     } catch (error) {
@@ -30,8 +31,9 @@ apiRouter.post('/login', async (req,res,next)=> {
 });
 
 apiRouter.post('/register', async (req,res,next)=> {
+    const {username,password} = req.body;
     try{
-        const {username,password} = req.body;
+        
         const queriedUser = await getUserByUserName(username);
         if (queriedUser) {
             res.status(401);
@@ -56,7 +58,7 @@ apiRouter.post('/register', async (req,res,next)=> {
                     message: 'There was a problem registering you. Please try again.',
                 });
             } else {
-                const token = jwt.sign({id: user.id, username: user.username}, JWT_SECRET, {expires: '1w'});
+                const token = jwt.sign({id: user.id, username: user.username}, JWT_SECRET);
                 res.send({user, message: "You're signed up!", token});
             }
         }
