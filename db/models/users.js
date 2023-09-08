@@ -7,9 +7,9 @@ async function createInitUsers(){
   console.log('Starting to create users...');
   try {
     const usersToCreate = [
-      { username: 'mark', password: 'password' },
-      { username: 'skyla', password: 'password' },
-      { username: 'scarlett', password: 'password' },
+      { username: 'mark', password: 'password', firstname: 'mark', lastname: 'parlan', email: 'myemail@hostname.com' },
+      { username: 'skyla', password: 'password', firstname: 'skyla', lastname: 'parlan', email: 'myemail@hostname.com' },
+      { username: 'scarlett', password: 'password', firstname: 'scarlett', lastname: 'parlan', email: 'myemail@hostname.com' },
     ]
     const users = await Promise.all(usersToCreate.map(createUser));
 
@@ -23,14 +23,14 @@ async function createInitUsers(){
 
 }
 
-async function createUser({username,password}){
+async function createUser({username,password,firstname,lastname,email}){
   const hashedPassword = await bcrypt.hash(password,SALT_COUNT);
   try{
     const {rows: [user]} = await client.query(`
-      INSERT INTO users(username,password) VALUES ($1,$2)
+      INSERT INTO users(username,password,firstname,lastname,email) VALUES ($1,$2,$3,$4,$5)
       ON CONFLICT (username) DO NOTHING
       RETURNING id, username
-    `, [username, hashedPassword]);
+    `, [username, hashedPassword, firstname, lastname, email]);
     return user;
   }catch (error) {
     throw error;

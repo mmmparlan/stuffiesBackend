@@ -3,6 +3,10 @@ const client = require('./client');
   const {
     createInitUsers
    } = require('./models/users')
+
+   const {
+    createStuffiesDatabase
+   } = require('./models/stuffies')
   
   async function buildTables() {
     try {
@@ -21,18 +25,21 @@ const client = require('./client');
         CREATE TABLE users(
             id SERIAL PRIMARY KEY,
             username VARCHAR(255) UNIQUE NOT NULL,
-            password VARCHAR(255) NOT NULL
+            password VARCHAR(255) NOT NULL,
+            firstname VARCHAR(255) NOT NULL,
+            lastname VARCHAR(255) NOT NULL,
+            email VARCHAR(255) NOT NULL
         )
         `);
         await client.query(`
         CREATE TABLE stuffies(
             id SERIAL PRIMARY KEY,
-            name VARCHAR(255) UNIQUE NOT NULL,
+            name VARCHAR(255) NOT NULL,
             price INTEGER NOT NULL,
             size VARCHAR(255) NOT NULL,
-            color VARCHAR(255) NOT NULL,
-            image1 VARCHAR(255),
-            image1 VARCHAR(255)
+            colors VARCHAR(255) NOT NULL,
+            imageUrl1 VARCHAR(255) NOT NULL,
+            imageUrl2 VARCHAR(255)
         )
         `);
     } catch (error) {
@@ -46,7 +53,9 @@ const client = require('./client');
       // Model.method() adapters to seed your db, for example:
       // const user1 = await User.createUser({ ...user info goes here... })
       await createInitUsers();
+      await createStuffiesDatabase();
       console.log('creating initial users')
+      console.log('creating stuffies table')
     } catch (error) {
       throw error
     }

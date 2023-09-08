@@ -1,5 +1,6 @@
 const client = require('./client')
 const {createInitUsers, createUser, getUser,getAllUsers,getUserByUserName,getUserById} = require('./models/users')
+const {createStuffiesDatabase, addStuffyToDatabase, getAllStuffies, getStuffyById} =require('./models/stuffies')
 //const {} = require('./models/stuffies')
 // user model imports between {} above
 module.exports = {
@@ -10,6 +11,10 @@ module.exports = {
   getUser,
   getAllUsers,
   getUserByUserName,
-  getUserById
+  getUserById,
+  createStuffiesDatabase,
+  addStuffyToDatabase,
+  getAllStuffies,
+  getStuffyById
   
 }
