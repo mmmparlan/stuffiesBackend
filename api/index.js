@@ -1,6 +1,17 @@
-const apiRouter = require('express').Router();
+const express = require('express');
+const apiRouter = express.Router();
+
 const jwt = require('jsonwebtoken');
-const { createUser, getAllUsers, getUser, getUserByUserName, getUserById} = require('../db');
+const { 
+    createUser, 
+    getAllUsers, 
+    getUser, 
+    getUserByUserName, 
+    getUserById, 
+    } = require('../db/models/users');
+
+    const {getAllStuffies, getStuffyById} = require('../db/models/stuffies');
+
 const client = require('../db/client');
 const { JWT_SECRET = 'neverTell'} = process.env;
 
@@ -47,7 +58,7 @@ apiRouter.use((req,res,next)=> {
 const usersRouter = require('./users');
 apiRouter.use('/users', usersRouter);
 
-// const stuffiesRouter = require('./stuffies');
-// apiRouter.use('/stuffies', stuffiesRouter);
+const stuffiesRouter = require('./stuffies');
+apiRouter.use('/stuffies', stuffiesRouter);
 
-module.exports = apiRouter
+module.exports = apiRouter;
