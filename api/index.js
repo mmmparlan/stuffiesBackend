@@ -10,7 +10,7 @@ const {
     getUserById, 
     } = require('../db/models/users');
 
-    const {getAllStuffies, getStuffyById} = require('../db/models/stuffies');
+const {getAllStuffies, getStuffyById} = require('../db/models/stuffies');
 
 const client = require('../db/client');
 const { JWT_SECRET = 'neverTell'} = process.env;
@@ -60,5 +60,11 @@ apiRouter.use('/users', usersRouter);
 
 const stuffiesRouter = require('./stuffies');
 apiRouter.use('/stuffies', stuffiesRouter);
+
+const reviewsRouter = require('./reviews');
+apiRouter.use('/reviews', reviewsRouter);
+
+const cartsRouter = require('./carts');
+apiRouter.use('/carts', cartsRouter);
 
 module.exports = apiRouter;

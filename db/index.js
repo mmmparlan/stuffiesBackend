@@ -1,6 +1,8 @@
 const client = require('./client')
 const {createInitUsers, createUser, getUser,getAllUsers,getUserByUserName,getUserById} = require('./models/users')
-const {createStuffiesDatabase, addStuffyToDatabase, getAllStuffies, getStuffyById} =require('./models/stuffies')
+const {createStuffiesDatabase, addStuffyToDatabase, getAllStuffies, getStuffyById} = require('./models/stuffies')
+const {getAllCartItems, createInitCartsData, addItemToCart, deleteItemFromCart, editItemQuantityFromCart} = require('./models/shoppingCart')
+const {getAllReviews,createInitReview, addReview, deleteReview,editReviewId} = require('./models/reviews')
 //const {} = require('./models/stuffies')
 // user model imports between {} above
 module.exports = {
@@ -15,6 +17,16 @@ module.exports = {
   createStuffiesDatabase,
   addStuffyToDatabase,
   getAllStuffies,
-  getStuffyById
+  getStuffyById,
+  createInitCartsData,
+  addItemToCart,
+  deleteItemFromCart,
+  getAllCartItems,
+  editItemQuantityFromCart,
+  createInitReview,
+  addReview,
+  deleteReview,
+  editReviewId,
+  getAllReviews
   
 }
