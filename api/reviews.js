@@ -35,10 +35,11 @@ apiRouter.put('/:id', async (req, res, next) => {
     }
 });
 
-// DELETE - /api/reviews/:id - delete a single board game by id
+// DELETE - /api/reviews/:id - delete reviews by stuffyid and username
 apiRouter.delete('/:id', async (req, res, next) => {
+    // const {id,usernameObj} = req.params;
     try {
-        const reviewById = await deleteReview(req.params.id);
+        const reviewById = await deleteReview(req.params);
         res.send(reviewById);
     } catch (error) {
         next(error);
